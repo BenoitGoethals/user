@@ -1,10 +1,11 @@
 package be.mil.users.entitys;
 
 import javax.persistence.*;
+import java.util.ArrayList;
+import java.util.Collection;
 import java.util.Objects;
 
 @Entity
-@Table(name = "role")
 public class Role {
 
 
@@ -17,8 +18,9 @@ public class Role {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Column(name = "role_id")
     private Long id;
-    @Column(name = "role")
+
     private String role;
 
     public Long getId() {
@@ -36,6 +38,9 @@ public class Role {
     public void setRole(String role) {
         this.role = role;
     }
+
+
+
 
     @Override
     public boolean equals(Object o) {

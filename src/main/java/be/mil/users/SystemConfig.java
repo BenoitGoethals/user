@@ -28,7 +28,10 @@ public class SystemConfig {
             Role role2=new Role("user");
             Role role3=new Role("guest");
 
+            roleRepository.save(role1);
             Set<Role> roleSet=new HashSet<Role>();
+            roleSet.add(role1);
+
 
             User user=new User("benoit@gmail.com","12345","benoit","goethals",1,roleSet);
             User user2=new User("test@gmail.com","12345","test","goethals",1,roleSet);
