@@ -46,16 +46,19 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(final HttpSecurity http) throws Exception {
-        http.authorizeRequests()
-                .antMatchers("/login")
-                .permitAll()
+        http
+                .csrf().disable()
+                .exceptionHandling()
+              //  .authenticationEntryPoint(restAuthenticationEntryPoint)
+                .and()
+                .authorizeRequests()
+                .antMatchers("/api/*").authenticated()
+             //   .antMatchers("/api/admin/**").hasRole("ADMIN")
                 .and()
                 .formLogin()
-                .permitAll()
-                .successHandler(successHandler)
-                .and()
-                .csrf()
-                .disable();
+               .successHandler(successHandler);
+              //  .failureHandler(myFailureHandler)
+
     }
 
     private ApiInfo getApiInfo() {
@@ -74,6 +77,7 @@ public class SecurityJavaConfig extends WebSecurityConfigurerAdapter {
     protected void configure(AuthenticationManagerBuilder auth)
             throws Exception {
         auth.authenticationProvider(authenticationProvider());
+
     }
     @Bean
     public PasswordEncoder encoder() {
