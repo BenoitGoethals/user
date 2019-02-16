@@ -13,10 +13,22 @@ import java.util.Set;
 @Table(name = "user")
 public class User {
 
+    public User() {
+    }
+
+    public User(@Email(message = "*Please provide a valid Email") @NotEmpty(message = "*Please provide an email") String email, @Length(min = 5, message = "*Your password must have at least 5 characters") @NotEmpty(message = "*Please provide your password") String password, @NotEmpty(message = "*Please provide your name") String name, @NotEmpty(message = "*Please provide your last name") String lastName, int active, Set<Role> roles) {
+        this.email = email;
+        this.password = password;
+        this.name = name;
+        this.lastName = lastName;
+        this.active = active;
+        this.roles = roles;
+    }
+
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "user_id")
-    private int id;
+    private Long id;
     @Column(name = "email")
     @Email(message = "*Please provide a valid Email")
     @NotEmpty(message = "*Please provide an email")
@@ -38,11 +50,11 @@ public class User {
     private Set<Role> roles;
 
 
-    public int getId() {
+    public Long getId() {
         return id;
     }
 
-    public void setId(int id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
